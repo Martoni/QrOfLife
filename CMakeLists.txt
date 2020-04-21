@@ -24,10 +24,12 @@ find_package(PkgConfig REQUIRED)
 
 set(QROFLIFE_SOURCE
 	src/QrOfLife.cpp
+  src/QrCode.cpp
 )
 
 set(QROFLIFE_HEADERS
 	src/QrOfLife.hpp
+  src/QrCode.hpp
 )
 
 add_executable(QrOfLife

@@ -10,5 +10,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <vector>
-
+#include <gtkmm.h>
+#include "QrCode.hpp"
 #endif
