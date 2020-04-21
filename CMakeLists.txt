@@ -21,6 +21,13 @@ include(GNUInstallDirs)
 add_definitions(-DDATA_DIR=\"${CMAKE_INSTALL_FULL_DATAROOTDIR}\")
 
 find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTKMM gtkmm-3.0)
+
+link_directories(
+    ${GTKMM_LIBRARY_DIRS}  )
+
+include_directories(
+    ${GTKMM_INCLUDE_DIRS}  )
 
 set(QROFLIFE_SOURCE
 	src/QrOfLife.cpp
@@ -40,5 +47,8 @@ add_executable(QrOfLife
 if (BUILD_STATIC)
 	set_target_properties(QrOfLife PROPERTIES LINK_SEARCH_END_STATIC 1)
 endif()
+
+target_link_libraries(QrOfLife
+    ${GTKMM_LIBRARIES}  )
 
 install(TARGETS QrOfLife DESTINATION bin)
