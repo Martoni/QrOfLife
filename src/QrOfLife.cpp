@@ -16,7 +16,7 @@ class GTKTest : public Window
         ComboBoxText comboBoxDisplayTo;
         CheckButton checkButtonPrependMessage;
         Button buttonDisplay;
-
+		MyArea myArea;
     // methods
 
     public: GTKTest()
@@ -27,32 +27,8 @@ class GTKTest : public Window
         add(vBoxMain);
         vBoxMain.show();
 
-        // labelTextToDisplay
-        labelTextToDisplay.set_label("Text to Display:");
-        vBoxMain.add(labelTextToDisplay);
-        labelTextToDisplay.show();
-
-        // entryTextToDisplay
-        entryTextToDisplay.set_text("This is a test!");
-        vBoxMain.add(entryTextToDisplay);
-        entryTextToDisplay.show();
-
-        // labelDisplayTo
-        labelDisplayTo.set_label("Display to:");
-        vBoxMain.add(labelDisplayTo);
-        labelDisplayTo.show();
-
-        // comboBoxDisplayTo
-        comboBoxDisplayTo.append("Console");
-        comboBoxDisplayTo.append("Dialog");
-        comboBoxDisplayTo.set_active(0);
-        vBoxMain.add(comboBoxDisplayTo);
-        comboBoxDisplayTo.show();
-
-        // checkButtonPrependMessage
-        checkButtonPrependMessage.set_label("Prepend 'Message: '");
-        vBoxMain.add(checkButtonPrependMessage);
-        checkButtonPrependMessage.show();
+		vBoxMain.add(myArea);
+		myArea.show();
 
         // buttonDisplay
         buttonDisplay.set_label("Display");
@@ -79,22 +55,7 @@ class GTKTest : public Window
         {
             textToDisplay.insert(0, "Message: ");
         }
-
-        string displayMode = comboBoxDisplayTo.get_active_text();
-
-        if (displayMode == "Console")
-        {
-            printf("%s\n", textToDisplay.c_str());
-        }
-        else if (displayMode == "Dialog")
-        {
-            MessageDialog dialog(textToDisplay);
-            dialog.run();
-        }
-        else
-        {
-            throw runtime_error("Unrecognized display mode!");
-        }
+        printf("%s\n", textToDisplay.c_str());
     }
 };
 

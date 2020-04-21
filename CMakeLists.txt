@@ -32,11 +32,13 @@ include_directories(
 set(QROFLIFE_SOURCE
 	src/QrOfLife.cpp
   src/QrCode.cpp
+  src/MyDrawing.cpp
 )
 
 set(QROFLIFE_HEADERS
 	src/QrOfLife.hpp
   src/QrCode.hpp
+  src/MyDrawing.hpp
 )
 
 add_executable(QrOfLife
