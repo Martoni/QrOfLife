@@ -30,15 +30,16 @@ include_directories(
     ${GTKMM_INCLUDE_DIRS}  )
 
 set(QROFLIFE_SOURCE
-	src/QrOfLife.cpp
+  src/QrOfLife.cpp
   src/QrCode.cpp
   src/MyDrawing.cpp
 )
 
 set(QROFLIFE_HEADERS
-	src/QrOfLife.hpp
+  src/QrOfLife.hpp
   src/QrCode.hpp
   src/MyDrawing.hpp
+  src/QOLWindow.hpp
 )
 
 add_executable(QrOfLife

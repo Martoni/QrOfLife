@@ -12,6 +12,4 @@
 #include <vector>
 #include <gtkmm.h>
 #include <gtkmm/drawingarea.h>
-#include "QrCode.hpp"
-#include "MyDrawing.hpp"
 #endif

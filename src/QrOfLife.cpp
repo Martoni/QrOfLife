@@ -1,70 +1,90 @@
 #include "QrOfLife.hpp"
+#include "QrCode.hpp"
+#include "MyDrawing.hpp"
+#include "QOLWindow.hpp"
 
 using namespace std;
 using namespace Gtk;
 using namespace qrcodegen;
 
-class GTKTest : public Window
-{
-    // controls
-
-    protected:
-        VBox vBoxMain;
-        Label labelTextToDisplay;
-        Entry entryTextToDisplay;
-        Label labelDisplayTo;
-        ComboBoxText comboBoxDisplayTo;
-        CheckButton checkButtonPrependMessage;
-        Button buttonDisplay;
-		MyArea myArea;
-    // methods
-
-    public: GTKTest()
-    {
-        set_border_width(10);
-
-        // vBoxMain
-        add(vBoxMain);
-        vBoxMain.show();
-
-		vBoxMain.add(myArea);
-		myArea.show();
-
-        // buttonDisplay
-        buttonDisplay.set_label("Display");
-        buttonDisplay.signal_clicked().connect
-        (
-            sigc::mem_fun
-            (
-                *this,
-                &GTKTest::buttonDisplayClicked
-            )
-        );
-        vBoxMain.add(buttonDisplay);
-        buttonDisplay.show();
-    }
-
-    // event handlers
-
-    protected: void buttonDisplayClicked()
-    {
-        string textToDisplay = entryTextToDisplay.get_text();
-
-        bool prependMessage = checkButtonPrependMessage.get_active();
-        if (prependMessage == true)
-        {
-            textToDisplay.insert(0, "Message: ");
-        }
-        printf("%s\n", textToDisplay.c_str());
-    }
+// argp example copied from:
+// https://www.gnu.org/software/libc/manual/html_node/Argp-Example-3.html
+const char *argp_program_version = "QrOfLife 0.1";
+const char *argp_program_bug_address = "<mail@fabienm.eu>";
+static char doc[] =
+        "QrOfLife -- A tribute to John Horton Conway, make Qr Code alive :)";
+static char args_doc[] = "ARG1";
+static struct argp_option options[] = {
+  {"help",       'h', 0,      0, "Get help message" },
+  {"verbose",    'v', 0,      0, "Produce verbose output" },
+  {"output",     'o', "FILE", 0, "Output gif" },
+  { 0 }
 };
 
+struct arguments
+{
+    string args[1]; /* Text to encode */
+    int verbose;
+    string output_file;
+    string input_text;
+};
+
+static error_t parse_opt (int key, char *arg, struct argp_state *state)
+{
+  /* Get the input argument from argp_parse, which we
+     know is a pointer to our arguments structure. */
+  struct arguments *arguments = static_cast<struct arguments *> (state->input);
+
+  switch (key)
+    {
+    case 'h':
+        argp_usage (state);
+        break;
+    case 'v':
+        arguments->verbose = 1;
+        break;
+    case 'o':
+        arguments->output_file = arg;
+        break;
+    case ARGP_KEY_ARG:
+        if (state->arg_num >= 1)
+            argp_usage (state);
+        arguments->args[state->arg_num] = arg;
+        break;
+    case ARGP_KEY_END:
+        if (state->arg_num < 1)
+        /* Not enough arguments. */
+            argp_usage (state);
+        break;
+    default:
+      return ARGP_ERR_UNKNOWN;
+    }
+  return 0;
+}
+
+/* Our argp parser. */
+static struct argp argp = { options, parse_opt, args_doc, doc };
 
 int main(int argc, char **argv)
 {
+    struct arguments arguments;
+
+    /* Default values. */
+    arguments.verbose = 0;
+    arguments.output_file = "qrout.gif";
+
+    /* Parse our arguments; every option seen by parse_opt will
+     be reflected in arguments. */
+    cout << "argc " << argc << endl;
+    argp_parse (&argp, argc, argv, 0, 0, &arguments);
+
     cout << "Welcome in QrOfLife program" << endl;
+
+    cout << "Let's make Qr Code with text :" << endl;
+    cout << arguments.args[0] << endl;
     // Simple operation
-    QrCode qr0 = QrCode::encodeText("Hello, world!", QrCode::Ecc::MEDIUM);
+    QrCode qr0 = QrCode::encodeText(arguments.args[0].c_str(),
+                                    QrCode::Ecc::MEDIUM);
     std::string svg = qr0.toSvgString(4);
 
     ofstream fsvg;
@@ -84,8 +104,8 @@ int main(int argc, char **argv)
 //    }
 
     Main kit(argc, argv);
-    GTKTest GTKTest;
-    Main::run(GTKTest);
+    QOLWindow QOLWindow;
+    Main::run(QOLWindow);
 
     return 0;
 }
