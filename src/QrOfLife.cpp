@@ -87,6 +87,9 @@ int main(int argc, char **argv)
     QrCode qr0 = QrCode::encodeText(arguments.args[0].c_str(),
                                     QrCode::Ecc::MEDIUM);
     std::string svg = qr0.toSvgString(4);
+    
+    GameOfLife gol(&qr0);
+
 
     ofstream fsvg;
     fsvg.open("qrtest.svg");
@@ -107,7 +110,7 @@ int main(int argc, char **argv)
     Main kit(argc, argv);
     QOLWindow QOLWindow;
     QOLWindow.qrtext = arguments.args[0];
-    QOLWindow.set_qr(&qr0);
+    QOLWindow.set_gol(&gol);
 //    QOLWindow.
     Main::run(QOLWindow);
 

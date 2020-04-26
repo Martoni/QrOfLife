@@ -33,6 +33,7 @@ set(QROFLIFE_SOURCE
   src/QrOfLife.cpp
   src/QrCode.cpp
   src/MyDrawing.cpp
+  src/GameOfLife.cpp
 )
 
 set(QROFLIFE_HEADERS
@@ -40,6 +41,7 @@ set(QROFLIFE_HEADERS
   src/QrCode.hpp
   src/MyDrawing.hpp
   src/QOLWindow.hpp
+  src/GameOfLife.hpp
 )
 
 add_executable(QrOfLife

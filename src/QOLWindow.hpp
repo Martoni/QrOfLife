@@ -2,6 +2,7 @@
 #define QOLWINDOW_HPP
 
 #include "QrOfLife.hpp"
+#include "GameOfLife.hpp"
 using namespace std;
 using namespace Gtk;
 
@@ -36,7 +37,7 @@ class QOLWindow : public Window
         myArea.show();
 
         // buttonDisplay
-        buttonDisplay.set_label("Display");
+        buttonDisplay.set_label("Evolve");
         buttonDisplay.signal_clicked().connect
         (
             sigc::mem_fun
@@ -55,6 +56,8 @@ class QOLWindow : public Window
     {
         string textToDisplay = qrtext;
 
+	myArea.gol_evolve();
+
         bool prependMessage = checkButtonPrependMessage.get_active();
         if (prependMessage == true)
         {
@@ -63,8 +66,8 @@ class QOLWindow : public Window
         printf("%s\n", textToDisplay.c_str());
     }
 
-    public: void set_qr(QrCode *aqr){
-        myArea.set_qr(aqr);
+    public: void set_gol(GameOfLife *agol){
+        myArea.set_gol(agol);
     }
 };
 

@@ -3,7 +3,8 @@
 
 #include <gtkmm/drawingarea.h>
 #include <gdkmm/pixbuf.h>
-#include "QrCode.hpp"
+#include "GameOfLife.hpp"
+
 using namespace std;
 using namespace qrcodegen;
 
@@ -16,14 +17,15 @@ public:
     const int mawidth = 500;
     const int maheight = 500;
 
-    QrCode *qr;
+    //QrCode *qr;
+    GameOfLife *gol;
 
-    void set_qr(QrCode *);
+    void set_gol(GameOfLife *);
+    void gol_evolve();
 
 protected:
 //Override default signal handler:
   bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
-  Glib::RefPtr<Gdk::Pixbuf> m_image;
 };
 #endif // GTKMM_EXAMPLE_MYAREA_H
