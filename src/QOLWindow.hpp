@@ -7,8 +7,12 @@ using namespace Gtk;
 
 class QOLWindow : public Window
 {
-    // controls
 
+    public:
+        string qrtext;
+
+
+    // controls
     protected:
         VBox vBoxMain;
         Label labelTextToDisplay;
@@ -49,7 +53,7 @@ class QOLWindow : public Window
 
     protected: void buttonDisplayClicked()
     {
-        string textToDisplay = entryTextToDisplay.get_text();
+        string textToDisplay = qrtext;
 
         bool prependMessage = checkButtonPrependMessage.get_active();
         if (prependMessage == true)
@@ -57,6 +61,10 @@ class QOLWindow : public Window
             textToDisplay.insert(0, "Message: ");
         }
         printf("%s\n", textToDisplay.c_str());
+    }
+
+    public: void set_qr(QrCode *aqr){
+        myArea.set_qr(aqr);
     }
 };
 

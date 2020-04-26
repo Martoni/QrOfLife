@@ -82,6 +82,7 @@ int main(int argc, char **argv)
 
     cout << "Let's make Qr Code with text :" << endl;
     cout << arguments.args[0] << endl;
+
     // Simple operation
     QrCode qr0 = QrCode::encodeText(arguments.args[0].c_str(),
                                     QrCode::Ecc::MEDIUM);
@@ -105,6 +106,9 @@ int main(int argc, char **argv)
 
     Main kit(argc, argv);
     QOLWindow QOLWindow;
+    QOLWindow.qrtext = arguments.args[0];
+    QOLWindow.set_qr(&qr0);
+//    QOLWindow.
     Main::run(QOLWindow);
 
     return 0;

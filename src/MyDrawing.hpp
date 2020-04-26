@@ -3,12 +3,22 @@
 
 #include <gtkmm/drawingarea.h>
 #include <gdkmm/pixbuf.h>
+#include "QrCode.hpp"
+using namespace std;
+using namespace qrcodegen;
 
 class MyArea : public Gtk::DrawingArea
 {
 public:
-  MyArea();
-  virtual ~MyArea();
+    MyArea();
+    virtual ~MyArea();
+
+    const int mawidth = 500;
+    const int maheight = 500;
+
+    QrCode *qr;
+
+    void set_qr(QrCode *);
 
 protected:
 //Override default signal handler:
