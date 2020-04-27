@@ -17,6 +17,7 @@ class GameOfLife {
         void set_module(int x, int y, bool value);
         void evolve();
         void nevolve(int n);
+	int population();
 
     protected:
         int count(int x, int y);

@@ -57,6 +57,7 @@ class QOLWindow : public Window
         string textToDisplay = qrtext;
 
 	myArea.gol_evolve();
+	myArea.queue_draw();
 
         bool prependMessage = checkButtonPrependMessage.get_active();
         if (prependMessage == true)

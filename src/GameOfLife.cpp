@@ -36,6 +36,14 @@ void GameOfLife::nevolve(int n){
         evolve();
 }
 
+int GameOfLife::population(){
+	int population = 0;
+	for (auto i: lifeArray)
+		for(auto j: i)
+			if(j) population++;
+	return population;
+}
+
 int GameOfLife::count(int x, int y){
     int friends = 0;
     int max = square_size - 1;
@@ -82,7 +90,9 @@ void GameOfLife::evolve(){
 
     vector<vector<bool> > newgen;
 
-    std::cout << "Evolve from gen " << generation << std::endl;
+    std::cout << "Evolve from gen " << generation
+	    << " population : " << population()
+	    << std::endl;
 
     newgen = vector<vector<bool> >(square_size,
                                    vector<bool>(square_size));
