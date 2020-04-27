@@ -1,7 +1,7 @@
 # QrOfLife
 Evoluate Qr code with Game Of Life rules
 
-[QrOfLife demo](https://github.com/Martoni/QrOfLife/raw/master/screenshot.gif "QrOfLifeDemo")
+![QrOfLife demo](https://github.com/Martoni/QrOfLife/raw/master/screenshot.gif "QrOfLifeDemo")
 
 # Install instruction
 
