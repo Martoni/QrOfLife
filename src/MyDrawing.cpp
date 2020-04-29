@@ -32,7 +32,6 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     set_size_request(fullsize, fullsize);
 
     cr->scale(fullsize, fullsize);
-    int i, j;
     cr->set_source_rgb (0, 0, 0);
 
     for (int y = 0; y < asize; y++) {
@@ -40,7 +39,7 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
             if(gol->get_module(x, y)){
                 cr->rectangle ((1.0+x)/(1.0 + asize),
                                (1.0+y)/(1.0 + asize),
-                               0.05, 0.05);
+				1.0/asize, 1.0/asize);
             }
         }
     }
