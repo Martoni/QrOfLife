@@ -1,9 +1,11 @@
 #include "GameOfLife.hpp"
+#include "QrOfLife.hpp"
 #include <iostream>
 #include <assert.h>
 using namespace std;
 
-GameOfLife::GameOfLife(QrCode * const aqr): donut(false) {
+GameOfLife::GameOfLife(QrCode * const aqr, struct arguments args):
+    donut(false), args(args) {
     int y, x;
     square_size = aqr->getSize();
     lifeArray = vector<vector<bool> >(square_size,
@@ -37,11 +39,11 @@ void GameOfLife::nevolve(int n){
 }
 
 int GameOfLife::population(){
-	int population = 0;
-	for (auto i: lifeArray)
-		for(auto j: i)
-			if(j) population++;
-	return population;
+    int population = 0;
+    for (auto i: lifeArray)
+        for(auto j: i)
+            if(j) population++;
+    return population;
 }
 
 int GameOfLife::count(int x, int y){
@@ -91,8 +93,8 @@ void GameOfLife::evolve(){
     vector<vector<bool> > newgen;
 
     std::cout << "Evolve from gen " << generation
-	    << " population : " << population()
-	    << std::endl;
+              << " population : " << population()
+              << std::endl;
 
     newgen = vector<vector<bool> >(square_size,
                                    vector<bool>(square_size));
