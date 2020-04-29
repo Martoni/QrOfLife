@@ -17,8 +17,8 @@ void MyArea::set_gol(GameOfLife *agol){
     gol = agol;
 }
 
-void MyArea::gol_evolve(){
-	gol->evolve();
+void MyArea::gol_evolve(int verbose){
+	gol->evolve(verbose);
 }
 
 bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)

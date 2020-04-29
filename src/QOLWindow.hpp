@@ -11,6 +11,8 @@ class QOLWindow : public Window
 {
 
     public:
+        QOLWindow(struct arguments args, GameOfLife *agol);
+
         string qrtext;
 
     // controls
@@ -23,12 +25,11 @@ class QOLWindow : public Window
         CheckButton checkButtonPrependMessage;
         Button buttonDisplay;
         MyArea myArea;
-	struct arguments args;
+        struct arguments args;
 
-    // methods
-    public: QOLWindow(struct arguments args, GameOfLife *agol);
     // event handlers
-    protected: void buttonDisplayClicked();
+        void buttonDisplayClicked();
+        bool on_timeout();
 };
 
 #endif

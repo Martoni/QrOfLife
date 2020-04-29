@@ -21,7 +21,7 @@ public:
     GameOfLife *gol;
 
     void set_gol(GameOfLife *);
-    void gol_evolve();
+    void gol_evolve(int verbose=0);
 
 protected:
 //Override default signal handler:

@@ -16,7 +16,7 @@ class GameOfLife {
         bool get_module(int x, int y);
         int get_generation();
         void set_module(int x, int y, bool value);
-        void evolve();
+        void evolve(int verbose=0);
         void nevolve(int n);
         int population();
 

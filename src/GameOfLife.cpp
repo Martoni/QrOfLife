@@ -83,7 +83,7 @@ int GameOfLife::count(int x, int y){
     return friends;
 }
 
-void GameOfLife::evolve(){
+void GameOfLife::evolve(int verbose){
     int x, y;
     int nfriends;
     bool alive;
@@ -92,9 +92,10 @@ void GameOfLife::evolve(){
 
     vector<vector<bool> > newgen;
 
-    std::cout << "Evolve from gen " << generation
-              << " population : " << population()
-              << std::endl;
+    if(verbose > 0)
+        std::cout << "Evolve from gen " << generation
+                  << " population : " << population()
+                  << std::endl;
 
     newgen = vector<vector<bool> >(square_size,
                                    vector<bool>(square_size));
